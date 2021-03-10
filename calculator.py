@@ -28,7 +28,27 @@ def show_about():
 def Exit():
     root.after(1, root.destroy)
     sys.exit
-    
+
+def vals():
+    a = int(disp_a.get())
+    b = int(disp_b.get())
+    c = int(disp_c.get())
+
+    if a == 0:
+        X = -(b/c)
+        Label(root, text="X: " + str(X)).grid(row=9, column=0)
+    else:
+        D = b**2 - 4*a*c
+        X1 = (-b-D**0.5)/2*a
+        X2 = (-b+D**0.5)/2*a
+
+        if D == 0:
+            Label(root, text="D: " + str(D)).grid(row=9, column=0)
+            Label(root, text="X: " + str(X1)).grid(row=9, column=1)
+        else:
+            Label(root, text = "D: " + str(D)).grid(row=9,column=0)
+            Label(root, text = "X1: " + str(X1)).grid(row=9,column=1)
+            Label(root, text = "X2: " + str(X2)).grid(row=9, column=2)
 # Create Menu
 mainmenu = Menu(root) 
 root.config(menu=mainmenu)
@@ -64,13 +84,35 @@ for i in but_list:
         c = 0
         r += 1
     if r == 5 and c == 4:
-        Button(root, text=i,command = cmd, width = 6).grid(row=5, column = 3,rowspan=2)
+        Button(root, text=i,command = cmd, width = 6).grid(row=5, column = 3)
 
 
 
 disp = Entry(root, width = 33)
 disp.grid(row=0, column=0, columnspan=5)
 
+# Уравнения
+text_a = Label(root, text="ax^2")
+text_a.grid(row=7,column=0)
+
+disp_a = Entry(root, width = 6)
+disp_a.grid(row=8,column=0)
+
+text_b = Label(root, text="bx")
+text_b.grid(row=7,column=1)
+
+disp_b = Entry(root, width = 6)
+disp_b.grid(row=8,column=1)
+
+text_c = Label(root, text="c")
+text_c.grid(row=7,column=2)
+
+disp_c = Entry(root, width = 6)
+disp_c.grid(row=8,column=2)
+
+Button(root, text="Enter",overrelief="ridge",width=6, bg="#F8F8FF",  activebackground="#DCDCDC", command = vals).grid(row=8,column=3)
+
+#Label(root, text="X1=").grid(row=9, column=0)
 
 def calc(key):
     global memory
@@ -144,5 +186,5 @@ def calc(key):
     
 
 root.resizable(False, False)
-root.geometry("210x175")
+root.geometry("210x575")
 root.mainloop()
